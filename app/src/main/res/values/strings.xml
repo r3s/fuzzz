@@ -13,25 +13,21 @@
     <string name="back"><![CDATA[<  Back]]></string>
     <string name="select_success">What happens if we succeed?</string>
     <string name="success_desc">Click on the \'+\' button to select what happens when we succeed. You will get options
-        to choose if it opens a new ativity, shows a toast or stays in the same activity
-    </string>
+        to choose if it opens a new ativity, shows a toast or stays in the same activity</string>
     <string name="select_failure">What happens if an attempt fails?</string>
     <string name="failure_desc">Click on the \'+\' button to select what happens when an ateempt fails. You will get
-        options to choose if it opens a failure activity, shows a toast or stays in the same activity
-    </string>
+        options to choose if it opens a failure activity, shows a toast or stays in the same activity</string>
     <string name="recon_step">Recon Step</string>
-    <string name="recon_desc">
-        <![CDATA[Click on the \'RECON\' button and open the screen of your app which contains the input fields you want to target. Our service will scan the screen and let you know when we finish through a toast. Once it is finished, you can come back to this app and click \'Next >\']]></string>
+    <string name="recon_desc"><![CDATA[Click on the \'RECON\' button and open the screen of your app which contains the input fields you want to target. Our service will scan the screen and let you know when we finish through a toast. Once it is finished, you can come back to this app and click \'Next >\']]></string>
     <string name="recon">RECON</string>
     <string name="select_inputs">Select input fields</string>
     <string name="select_input_desc">Click on the \'+\' button to select the input fields you want to fuzz. We will show
-        you the fields we found during ther previous RECON step.
-    </string>
+        you the fields we found during ther previous RECON step.</string>
     <string name="fuzz_it">Fuzz It</string>
     <string name="fuzz_it_desc">Click on the \'START\' button and open the screen of your target app containing the
         input fields and we will start running the fuzzer. You can stop the fuzzer by coming back to this app and
-        clicking on \'STOP\' button.
-    </string>
+        clicking on \'STOP\' button.</string>
     <string name="start">START</string>
+    <string name="title_activity_app_chooser">AppChooserActivity</string>
 
 </resources>
