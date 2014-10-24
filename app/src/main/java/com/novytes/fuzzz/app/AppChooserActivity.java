@@ -1,4 +1,4 @@
-package com.novytes.fuzzz.app.helpers;
+package com.novytes.fuzzz.app;
 
 
 import android.app.ListActivity;
@@ -13,7 +13,6 @@ import android.view.View;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
-import com.novytes.fuzzz.app.R;
 
 import java.util.ArrayList;
 import java.util.List;
