@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -20,39 +21,53 @@ import com.novytes.fuzzz.app.helpers.TargetHelper;
 import com.novytes.fuzzz.app.models.TargetInfo;
 
 
-public class MainActivity extends Activity {
+public class SelectTargetActivity extends Activity {
 
-    private static int REQ_APP = 13;
+    private static int REQ_ACTIVITY = 14;
     private TargetInfo info;
     private TargetHelper targetHelper;
     private PreferenceHelper prefHelper;
 
     private Context context;
 
-
-    @InjectView(R.id.btn_select_app) Button btnSelectApp;
+    @InjectView(R.id.btn_select_activity) Button btnSelectActivity;
+    @InjectView(R.id.btn_back) Button btnBack;
     @InjectView(R.id.btn_next) Button btnNext;
     @InjectView(R.id.btn_reset) Button btnReset;
-    @InjectView(R.id.app_icon) ImageView appIcon;
-
+    @InjectView(R.id.txt_activity_name) TextView txtActivityName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
+        setContentView(R.layout.select_activity_main);
 
         ButterKnife.inject(this);
 
         context = getApplicationContext();
-        info = new TargetInfo();
         targetHelper = new TargetHelper();
         prefHelper = new PreferenceHelper(context);
 
-        btnSelectApp.setOnClickListener(new View.OnClickListener() {
+        info = prefHelper.getTarget("target");
+        if(info.getAppName().isEmpty()){
+            Toast.makeText(context, "Target application not selected", Toast.LENGTH_LONG).show();
+            finish();
+        }
+
+        btnSelectActivity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getApplicationContext(), AppChooserActivity.class);
-                startActivityForResult(i, REQ_APP);
+                Intent i = new Intent(getApplicationContext(), TargetActivityChooser.class);
+                i.putExtra("appname", info.getAppName());
+                startActivityForResult(i, REQ_ACTIVITY);
+            }
+        });
+
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                targetHelper.clearField(info, 1);
+                prefHelper.writeTarget("target", info);
+                finish();
             }
         });
 
@@ -61,47 +76,32 @@ public class MainActivity extends Activity {
             public void onClick(View view) {
                 targetHelper.clearAllFields(info);
                 prefHelper.writeTarget("target", info);
-                appIcon.setVisibility(View.INVISIBLE);
-                btnSelectApp.setVisibility(View.VISIBLE);
-                Toast.makeText(context, "Reset done", Toast.LENGTH_SHORT).show();
+                finish();
             }
         });
 
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!info.getAppName().isEmpty()){
-                    Intent i = new Intent(context, SelectTargetActivity.class);
-                    startActivity(i);
-                }else{
-                    Toast.makeText(context, "Please select an application using the + button",
-                            Toast.LENGTH_LONG).show();
-                }
+
             }
         });
-
-    }
-
-    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         info = prefHelper.getTarget("target");
-        if(info.getAppName().isEmpty()){
-            appIcon.setVisibility(View.INVISIBLE);
-            btnSelectApp.setVisibility(View.VISIBLE);
+        if(info.getTargetActivity().isEmpty()){
+            txtActivityName.setVisibility(View.INVISIBLE);
+            btnSelectActivity.setVisibility(View.VISIBLE);
         }
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.select_target, menu);
         return true;
     }
 
@@ -117,31 +117,25 @@ public class MainActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if(resultCode == RESULT_OK){
 
-            if(requestCode == REQ_APP){
-                String appName = data.getStringExtra("appname");
-                Log.d("TAGGGG", appName);
-                Drawable icon = null;
+            if(requestCode == REQ_ACTIVITY){
+                String activityName = data.getStringExtra("activityName");
                 try {
-                    icon = getApplicationContext().getPackageManager().getApplicationIcon(appName);
-                    btnSelectApp.setVisibility(View.INVISIBLE);
-                    appIcon.setVisibility(View.VISIBLE);
-                    appIcon.setImageDrawable(icon);
-                    info.setAppName(appName);
+                    btnSelectActivity.setVisibility(View.INVISIBLE);
+                    info.setTargetActivity(activityName);
                     prefHelper.writeTarget("target", info);
-                } catch (PackageManager.NameNotFoundException e) {
+                    txtActivityName.setText(activityName);
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
 
             }
 
         }
-
     }
 }

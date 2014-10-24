@@ -3,6 +3,7 @@ package com.novytes.fuzzz.app.helpers;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Parcelable;
+import android.util.Log;
 import com.google.gson.Gson;
 import com.novytes.fuzzz.app.R;
 import com.novytes.fuzzz.app.models.TargetInfo;
@@ -26,10 +27,12 @@ public class PreferenceHelper {
 
     public void writeInt(String key, int value){
         preferencesEditor.putInt(key, value);
+        preferencesEditor.commit();
     }
 
     public void writeString(String key, String value){
         preferencesEditor.putString(key, value);
+        preferencesEditor.commit();
     }
 
     public void writeTarget(String key, TargetInfo info){
@@ -37,6 +40,7 @@ public class PreferenceHelper {
         Gson gson = new Gson();
         String json = gson.toJson(info);
         preferencesEditor.putString(key, json);
+        preferencesEditor.commit();
 
     }
 

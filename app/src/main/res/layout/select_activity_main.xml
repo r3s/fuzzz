@@ -11,8 +11,8 @@
             android:background="@android:color/transparent"
             android:text="@string/back"
             android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="30dp"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="30dp"
             android:layout_marginTop="10dp"
             android:id="@+id/btn_back"
             />
@@ -24,7 +24,7 @@
             android:id="@+id/textView"
             android:textSize="32sp"
             android:textColor="#FFF"
-            android:layout_marginLeft="30dp"
+            android:layout_marginStart="30dp"
             android:layout_marginTop="70dp"
             android:layout_alignParentTop="true"/>
     <TextView
@@ -37,7 +37,7 @@
             android:layout_below="@+id/textView"
             android:layout_alignStart="@+id/textView"
             android:layout_marginTop="30dp"
-            android:layout_marginRight="60dp"/>
+            android:layout_marginEnd="60dp"/>
     <Button
             android:layout_width="72dp"
             android:layout_height="72dp"
@@ -46,6 +46,16 @@
             android:layout_centerHorizontal="true"
             android:layout_below="@+id/textView2"
             android:layout_marginTop="50dp"/>
+
+    <TextView android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:id="@+id/txt_activity_name"
+              android:layout_centerHorizontal="true"
+              android:layout_below="@+id/textView2"
+              android:layout_marginTop="50dp"
+            />
+
+
     <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -53,9 +63,9 @@
             android:id="@+id/btn_next"
             android:background="@android:color/transparent"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:layout_marginBottom="30dp"
-            android:layout_marginRight="30dp"/>
+            android:layout_marginEnd="30dp"/>
     <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -63,7 +73,7 @@
             android:id="@+id/btn_reset"
             android:background="@android:color/transparent"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="30dp"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="30dp"
             android:layout_marginBottom="30dp"/>
 </RelativeLayout>

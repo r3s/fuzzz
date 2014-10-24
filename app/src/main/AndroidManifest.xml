@@ -8,7 +8,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.novytes.fuzzz.app.MainActivity"
+            android:name=".MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,6 +19,14 @@
         <activity
             android:name=".AppChooserActivity"
             android:label="@string/title_activity_app_chooser" >
+        </activity>
+        <activity
+            android:name=".SelectTargetActivity"
+            android:label="@string/title_activity_select_target" >
+        </activity>
+        <activity
+            android:name=".TargetActivityChooser"
+            android:label="@string/title_activity_target_activity_chooser" >
         </activity>
     </application>
 
